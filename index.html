@@ -461,6 +461,7 @@
       </a>
       <ul class="toc_section">
         <li data-name="extend">– <a href="#View-extend">extend</a></li>
+        <li data-name="preinitialize">– <a href="#View-preinitialize">preinitialize</a></li>
         <li data-name="constructor / initialize">– <a href="#View-constructor">constructor / initialize</a></li>
         <li data-name="el">– <a href="#View-el">el</a></li>
         <li data-name="$el">– <a href="#View-$el">$el</a></li>
@@ -2810,6 +2811,33 @@ var DocumentRow = Backbone.View.extend({
       you want to wait to define them until runtime.
     </p>
 
+    <p id="View-preinitialize">
+      <b class="header">Preinitialize</b><code>sajib new View([options])</code>
+      <br />
+      The main purpose of <b>preinitialize</b> method is to support ES6 classes. If you define an <b>preinitialize</b> function, it will be invoked when
+      the view is first created and it also run before any instantiation is run in the view.
+    </p>
+
+    <pre>
+class DocumentRow extends Backbone.View {
+    preinitialize() {
+      _.extend(this, {
+        tagName:  "li",
+        className: "document-row",
+        events: {
+          "click .icon": "open"
+        }
+      });
+    }
+
+    initialize() {
+      this.listenTo(this.model, "change", this.render);
+    }
+
+    render() { ... }
+}
+</pre>
+
     <p id="View-constructor">
       <b class="header">constructor / initialize</b><code>new View([options])</code>
       <br />
@@ -4335,14 +4363,16 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        Added <tt>findIndex</tt> and <tt>findLastIndex</tt> Underscore methods to
-        <tt>Collection</tt>.
+        Added support for <tt>ES6 classes</tt> with a <tt>preinitialize</tt> method
       </li>
       <li>
-        Fix description for <tt>Model</tt>.
+        Added <tt>iterator</tt> support implementing JS Iterable protocol
       </li>
       <li>
-        Fix broken links for <tt>Jasmine</tt> and <tt>jQuery</tt> templates.
+        Fixed a bug with the hash generation from Router.navigate
+      </li>
+      <li>
+        Use the public <b>on</b> method when listening
       </li>
       <li>
         Check if obj is Model in Collection.get.
