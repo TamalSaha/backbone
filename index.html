@@ -4438,7 +4438,7 @@ ActiveRecord::Base.include_root_in_json = false
         Fixed a bug with the Router's hash generator.
       </li>
       <li>
-        `#listenTo` uses the listened object's public `#on` method. This keeps interop between Backbone and any other event library (including Node.js).
+        `#listenTo` uses listened object's public `#on` method. This keeps interop between Backbone and any other event library (including Node.js).
       </li>
       <li>
         <tt>Collection.get</tt> now checks if obj is a <tt>Model</tt> to allow retrieving models with `attributes` key.
