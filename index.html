@@ -2537,7 +2537,7 @@ router.on("route:help", function(page) {
 class Router extends Backbone.Router {
     preinitialize: function() {
       // Override execute method
-      this.execute: function(callback, args, name) {
+      this.execute = function(callback, args, name) {
         if (!loggedIn) {
           goToLogin();
           return false;
